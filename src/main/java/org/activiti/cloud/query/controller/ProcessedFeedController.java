@@ -56,17 +56,10 @@ public class ProcessedFeedController {
 
         for(VariableEntity variableEntity:matchedVariables){
 
-            if(variableEntity.getValue() instanceof Boolean && Boolean.TRUE.equals(variableEntity.getValue())){
-                matchedProcessInstancesList.add(variableEntity.getProcessInstance());
-                logger.info("variable matched "+variableEntity);
-            } else{
-                logger.info("variable "+variableEntity);
-            }
-
-            if(variableEntity.getValue()!=null){
-                logger.info("variable.value "+variableEntity.getValue());
-                logger.info("variable.name "+variableEntity.getName());
-                logger.info("variable.type "+variableEntity.getType());
+            if(variableEntity.getName().equalsIgnoreCase("matched") && variableEntity.getType().equalsIgnoreCase("string")){
+                if(variableEntity.getValue()!=null &&variableEntity.getValue() instanceof String && ((String) variableEntity.getValue()).equalsIgnoreCase("true")){
+                    matchedProcessInstancesList.add(variableEntity.getProcessInstance());
+                }
             }
 
         }

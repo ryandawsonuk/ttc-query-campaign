@@ -81,9 +81,13 @@ public class ReactiveProcessedFeedController {
             List<ProcessInstanceEntity> matchedProcessInstancesList = new ArrayList<ProcessInstanceEntity>();
 
             for(VariableEntity variableEntity:matchedVariables){
-                if(variableEntity.getValue()instanceof Boolean && Boolean.TRUE.equals(variableEntity.getValue())){
-                    matchedProcessInstancesList.add(variableEntity.getProcessInstance());
+
+                if(variableEntity.getName().equalsIgnoreCase("matched") && variableEntity.getType().equalsIgnoreCase("string")){
+                    if(variableEntity.getValue()!=null &&variableEntity.getValue() instanceof String && ((String) variableEntity.getValue()).equalsIgnoreCase("true")){
+                        matchedProcessInstancesList.add(variableEntity.getProcessInstance());
+                    }
                 }
+
             }
 
             List<ProcessInstanceEntity> matchedProcessInstances = new ArrayList<>(matchedProcessInstancesList);
