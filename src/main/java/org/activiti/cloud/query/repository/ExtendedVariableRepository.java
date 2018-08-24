@@ -12,12 +12,12 @@ public interface ExtendedVariableRepository extends VariableRepository {
 
     @Query("select v from Variable v where v.name= 'matched' " +
                      "and v.processInstance.status='COMPLETED' "+
-                     "and pi.businessKey= :campaign")
+                     "and v.processInstance.businessKey= :campaign")
     List<VariableEntity> findAllCompletedAndMatched(@Param("campaign") String campaign);
 
     @Query("select v from Variable v where v.name= 'matched' " +
             "and v.processInstance.status='COMPLETED' "+
-            "and pi.businessKey= :campaign and pi.lastModified > :since order by pi.lastModified desc")
+            "and v.processInstance.businessKey= :campaign and v.processInstance.lastModified > :since order by v.processInstance.lastModified desc")
     List<VariableEntity> findAllCompletedAndMatchedSince(@Param("campaign") String campaign, @Param("since") Date since);
 
 }
