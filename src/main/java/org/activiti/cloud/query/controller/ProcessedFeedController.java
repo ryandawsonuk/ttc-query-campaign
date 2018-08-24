@@ -55,9 +55,20 @@ public class ProcessedFeedController {
         List<ProcessInstanceEntity> matchedProcessInstancesList = new ArrayList<ProcessInstanceEntity>();
 
         for(VariableEntity variableEntity:matchedVariables){
-            if(variableEntity.getValue()instanceof Boolean && Boolean.TRUE.equals(variableEntity.getValue())){
+
+            if(variableEntity.getValue() instanceof Boolean && Boolean.TRUE.equals(variableEntity.getValue())){
                 matchedProcessInstancesList.add(variableEntity.getProcessInstance());
+                logger.info("variable matched "+variableEntity);
+            } else{
+                logger.info("variable "+variableEntity);
             }
+
+            if(variableEntity.getValue()!=null){
+                logger.info("variable.value "+variableEntity.getValue());
+                logger.info("variable.name "+variableEntity.getName());
+                logger.info("variable.type "+variableEntity.getType());
+            }
+
         }
 
         List<ProcessInstanceEntity> matchedProcessInstances = new ArrayList<>(matchedProcessInstancesList);
